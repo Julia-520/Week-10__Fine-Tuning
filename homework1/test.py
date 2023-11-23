@@ -1,12 +1,20 @@
 import openai
+import os
+from dotenv import load_dotenv, find_dotenv
+_ = load_dotenv(find_dotenv()) # read local .env file
+
+openai.api_key  = os.environ['OPENAI_API_KEY']
+
+FINE_TUNED_MODEL="curie:ft-personal-2023-11-21-07-01-13"
+YOUR_PROMPT="What is the remote for?"
+
 response = openai.Completion.create(
-    model="curie:ft-personal-2023-11-20-04-24-24",
-    prompt="When do I need to start my air conditioner?"
+    model=FINE_TUNED_MODEL,
+    prompt=YOUR_PROMPT
     # additional parameters
     # temperature,
     # frequency_penalty,
     # presence_penalty
     # ..etc
 )
-
-print(response.choices[0].text)
+print(response)
